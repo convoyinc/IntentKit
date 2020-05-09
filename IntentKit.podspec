@@ -1,20 +1,19 @@
 Pod::Spec.new do |s|
   s.name      = 'IntentKit'
-  s.version   = '0.7.5'
+  s.version   = '0.7.5-convoy-1'
   s.license   = { :type => 'MIT', :file => "LICENSE" }
   s.summary   = "An easier way to handle third-party URL schemes in iOS apps."
   s.homepage  = 'https://github.com/intentkit/IntentKit'
   s.authors   = { 'Mike Walker' => 'michael@lazerwalker.com' }
-  s.source    = { :git => 'https://github.com/intentkit/IntentKit.git', :tag => "0.7.5" }
+  s.source    = { :git => 'https://github.com/convoyinc/IntentKit.git', :branch => "v0.7.5-convoy-1" }
   s.requires_arc = true
-  s.platform  = :ios, '7.0'
+  s.platform  = :ios, '10.0'
 
   s.subspec 'Core' do |ss|
     ss.source_files = 'IntentKit', 'IntentKit/Core/**/*.{h,m}', "IntentKit/Handlers/INKBrowserHandler.{h,m}", 'IntentKit/Apps/INKWebView/*.{h,m}'
     ss.dependency "MWLayoutHelpers"
     ss.resources = 'IntentKit/IntentKit-Localizations.bundle'
-    ss.resource_bundles = { 'IntentKit' => 'IntentKit/{**/*.strings,Images/*.png}',
-                            'IntentKit-Defaults' => "IntentKit/Apps/Defaults/*.{plist,png}",
+    ss.resource_bundles = { 'IntentKit-Defaults' => "IntentKit/Apps/Defaults/*.{plist,png}",
                             'IntentKit-INKBrowserHandler' => "IntentKit/Apps/{Chrome,Safari,1Password,INKWebView}/*.{plist,png}" }
     ss.requires_arc = true
   end

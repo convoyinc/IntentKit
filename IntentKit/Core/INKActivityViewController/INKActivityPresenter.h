@@ -37,7 +37,7 @@
 - (BOOL)canPerformActivity;
 
 /** Removes the active `INKActivityViewController` from view.
- @param animaed Whether or not to animate the transition */
+ @param animated Whether or not to animate the transition */
 - (void)dismissActivitySheetAnimated:(BOOL)animated;
 
 /** Present the current activity sheet modally. 
@@ -54,7 +54,7 @@
  @warning This attempts to programmatically determine the topmost view
  controller and present on that; if that does not work in your app, you probably
  want to manually pass in a view controller using `presentModalActivitySheetFromViewController:completion.*/
-- (void)presentModallyWithCompletion:(void(^)())completion;
+- (void)presentModallyWithCompletion:(void(^)(void))completion;
 
 /** Present the current activity sheet modally on a given view controller.
  @param presentingViewController A UIViewController to serve as the activity sheet's presentingViewController.
@@ -63,7 +63,7 @@
  @warning If your app is either Universal or iPad-only, you should instead use presentModalActivitySheetFromViewController:popoverFromRect:inView:permittedArrowDirections: or presentModalActivitySheetFromViewController:popoverFromBarButtonItem:permittedArrowDirections: instead.
 */
 - (void)presentModalActivitySheetFromViewController:(UIViewController *)presentingViewController
-                                         completion:(void(^)())completion;
+                                         completion:(void(^)(void))completion;
 
 /** Present the current activity sheet on the given view controller. If the device is an iPhone, it will be presented modally; if an iPad, it will be presented in a UIPopoverController with the given options. 
  
@@ -79,7 +79,7 @@
                                         inView:(UIView *)view
                       permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections
                                       animated:(BOOL)animated
-                                    completion:(void(^)())completion;
+                                    completion:(void(^)(void))completion;
 
 /** Present the current activity sheet on the given view controller. If the device is an iPhone, it will be presented modally; if an iPad, it will be presented in a UIPopoverController with the given options.
 
@@ -94,6 +94,6 @@
                       popoverFromBarButtonItem:(UIBarButtonItem *)item
                       permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections
                                       animated:(BOOL)animated
-                                    completion:(void(^)())completion;
+                                    completion:(void(^)(void))completion;
 
 @end

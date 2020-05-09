@@ -157,7 +157,7 @@
                                                          data:self.activityArguments];
 
         NSURL *url = [NSURL URLWithString:urlString];
-        [self.application openURL:url];
+        [self.application openURL:url options:@{} completionHandler:nil];
     }
 }
 

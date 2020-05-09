@@ -8,13 +8,7 @@
 #import "NSString+Helpers.h"
 
 NSString *(^ink_urlEncode)(NSString *) = ^NSString *(NSString *input){
-    CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(
-                                                                    kCFAllocatorDefault,
-                                                                    (CFStringRef)input,
-                                                                    NULL,
-                                                                    (CFStringRef)@"!*'();:@&=+$?%#/[]",
-                                                                    kCFStringEncodingUTF8);
-    return (__bridge NSString *)urlString;
+    return [input stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 };
 
 @implementation NSString (Helpers)

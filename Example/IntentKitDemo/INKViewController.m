@@ -22,9 +22,9 @@
 
 @interface INKViewController ()
 
-@property (strong, nonatomic) UIPopoverController *popover;
 @property (strong, nonatomic) UISwitch *activitySwitch;
 @property (strong, nonatomic) UISwitch *useSystemDefaultSwitch;
+
 @end
 
 @implementation INKViewController
@@ -82,7 +82,7 @@
                              INKBrowserHandler *handler = [[INKBrowserHandler alloc] init];
                              handler.alwaysShowActivityView = self.activitySwitch.on;
                              handler.useSystemDefault = self.useSystemDefaultSwitch.on;
-                             NSURL *url = [NSURL URLWithString:@"http://google.com"];
+                             NSURL *url = [NSURL URLWithString:@"https://google.com"];
                              return [handler openURL:url];
                          }
                         },
@@ -220,7 +220,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    INKActivityPresenter *(^action)() = self.content[indexPath.section][@"items"][indexPath.row][@"action"];
+    INKActivityPresenter *(^action)(void) = self.content[indexPath.section][@"items"][indexPath.row][@"action"];
     INKActivityPresenter *presenter = action();
 
     [presenter presentActivitySheetFromViewController:self popoverFromRect:[tableView rectForRowAtIndexPath:indexPath] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES completion:nil];

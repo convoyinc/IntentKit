@@ -33,12 +33,12 @@ to handle all actions; in that case, a fallback activity view will be shown. */
 @property (assign, nonatomic) BOOL disableSettingDefault;
 
 /** By default, if a handler has both a first-party app and an in-app modal view
- (e.g. Safari and an in-app UIWebView), the first-party app won't be displayed.
+ (e.g. Safari and an in-app WKWebView), the first-party app won't be displayed.
 
  Setting this to YES will show the first-party app as an option. */
 @property (nonatomic, assign) BOOL showFirstPartyApp;
 
-/** If a handler has an "In App" option (e.g. an in-app UIWebView for 
+/** If a handler has an "In App" option (e.g. an in-app WKWebView for 
  INKBrowserHandler), setting this to YES will disable it */
 @property (nonatomic, assign) BOOL disableInAppOption;
 

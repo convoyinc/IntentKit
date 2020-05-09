@@ -6,12 +6,14 @@
 //
 //
 
+#import <WebKit/WebKit.h>
 #import "INKWebViewController.h"
 #import "IntentKit.h"
 #import "INKOpenInActivity.h"
 
-@interface INKWebViewController ()<UIWebViewDelegate, UIPopoverControllerDelegate>
-@property (strong, nonatomic) UIWebView *webView;
+@interface INKWebViewController ()<WKNavigationDelegate, WKUIDelegate, UIPopoverControllerDelegate>
+
+@property (strong, nonatomic) WKWebView *webView;
 @property (assign, nonatomic) BOOL networkIndicatorWasVisible;
 @property (strong, nonatomic) NSURL *initialURL;
 
@@ -20,7 +22,6 @@
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;
 @property (strong, nonatomic) UIBarButtonItem *shareButton;
 
-@property (strong, nonatomic) UIPopoverController *popover;
 @end
 
 @implementation INKWebViewController
@@ -29,10 +30,11 @@
     self = [super init];
     if (!self) return nil;
 
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
     self.webView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.webView.delegate = self;
 
     self.title = @"Loading...";
 
@@ -109,17 +111,21 @@
     UIActivityViewController *shareSheet = [[UIActivityViewController alloc] initWithActivityItems:@[self.url] applicationActivities:@[openIn]];
 
     if (IntentKit.sharedInstance.isPad) {
-        self.popover = [[UIPopoverController alloc] initWithContentViewController:shareSheet];
-        [self.popover presentPopoverFromBarButtonItem:self.shareButton permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-        self.popover.delegate = self;
+        [shareSheet setModalPresentationStyle:UIModalPresentationPopover];
+        [shareSheet.popoverPresentationController setBarButtonItem:self.shareButton];
+        [shareSheet.popoverPresentationController setPermittedArrowDirections:UIPopoverArrowDirectionUp];
+
+        [self presentViewController:shareSheet animated:YES completion:nil];
     } else {
         [self presentViewController:shareSheet animated:YES completion:nil];
     }
 }
 
-#pragma mark - UIWebViewDelegate
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+#pragma mark - WKUIDelegate
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    [webView evaluateJavaScript:@"document.title" completionHandler:^(NSString* result, NSError* error) {
+        self.title = result;
+    }];
 
     if (!self.networkIndicatorWasVisible) {
         UIApplication.sharedApplication.networkActivityIndicatorVisible = NO;
@@ -130,19 +136,14 @@
     self.forwardButton.enabled = self.webView.canGoForward;
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     self.networkIndicatorWasVisible = UIApplication.sharedApplication.networkActivityIndicatorVisible;
     UIApplication.sharedApplication.networkActivityIndicatorVisible = YES;
 }
 
-#pragma mark - UIPopoverControllerDelegate
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-    self.popover = nil;
-}
-
 #pragma mark - Private
 - (NSURL *)url {
-    NSURL *webViewURL = self.webView.request.URL;
+    NSURL *webViewURL = self.webView.URL;
     if ([webViewURL.absoluteString isEqualToString:@""]) {
         return self.initialURL;
     } else {

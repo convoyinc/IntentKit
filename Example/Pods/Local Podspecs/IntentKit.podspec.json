@@ -1,6 +1,6 @@
 {
   "name": "IntentKit",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,11 +12,11 @@
   },
   "source": {
     "git": "https://github.com/intentkit/IntentKit.git",
-    "tag": "0.7.4"
+    "tag": "0.7.5"
   },
   "requires_arc": true,
   "platforms": {
-    "ios": "7.0"
+    "ios": "10.0"
   },
   "subspecs": [
     {
@@ -34,7 +34,6 @@
       },
       "resources": "IntentKit/IntentKit-Localizations.bundle",
       "resource_bundles": {
-        "IntentKit": "IntentKit/{**/*.strings,Images/*.png}",
         "IntentKit-Defaults": "IntentKit/Apps/Defaults/*.{plist,png}",
         "IntentKit-INKBrowserHandler": "IntentKit/Apps/{Chrome,Safari,1Password,INKWebView}/*.{plist,png}"
       },

@@ -1,5 +1,7 @@
 Pods/*
 docs/*
+Example/Pods
+
 # gitignore.io
 *.xcworkspace
 *.xcworkspace/xcuserdata

@@ -15,7 +15,6 @@
 
 @property (weak, nonatomic) UIViewController *presentingViewController;
 @property (strong, nonatomic) UIView *shadeView;
-@property (strong, nonatomic) UIPopoverController *popoverController;
 
 @property (assign, nonatomic) UIModalPresentationStyle originalPresentingModalPresentationStyle;
 @property (assign, nonatomic) UIModalPresentationStyle originalRootModalPresentationStyle;
@@ -23,7 +22,7 @@
 @property (assign, nonatomic) BOOL originalRootProvidesPresentationContextTransitionStyle;
 @property (assign, nonatomic) BOOL originalRootDefinesPresentationContext;
 
-@property (copy, nonatomic) void (^completionBlock)();
+@property (copy, nonatomic) void (^completionBlock)(void);
 
 @end
 
@@ -57,12 +56,12 @@
     [self presentModalActivitySheetFromViewController:top completion:nil];
 }
 
-- (void)presentModallyWithCompletion:(void(^)())completion {
+- (void)presentModallyWithCompletion:(void(^)(void))completion {
     UIViewController *top = IntentKit.sharedInstance.visibleViewController;
     [self presentModalActivitySheetFromViewController:top completion:completion];
 }
 
-- (void)presentModalActivitySheetFromViewController:(UIViewController *)presentingViewController completion:(void (^)())completion {
+- (void)presentModalActivitySheetFromViewController:(UIViewController *)presentingViewController completion:(void (^)(void))completion {
     if (!self.canPerformActivity) return;
 
     self.completionBlock = completion;
@@ -112,7 +111,7 @@
 }
 }
 
-- (void)presentActivitySheetFromViewController:(UIViewController *)presentingViewController popoverFromRect:(CGRect)rect inView:(UIView *)view permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections animated:(BOOL)animated completion:(void (^)())completion {
+- (void)presentActivitySheetFromViewController:(UIViewController *)presentingViewController popoverFromRect:(CGRect)rect inView:(UIView *)view permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections animated:(BOOL)animated completion:(void (^)(void))completion {
     if (!self.canPerformActivity) return;
 
     self.completionBlock = completion;
@@ -120,16 +119,19 @@
     if (self.activity) {
         [self.activity performActivityInViewController:presentingViewController];
     } else if (IntentKit.sharedInstance.isPad && self.activitySheet) {
+        [self.activitySheet setModalPresentationStyle:UIModalPresentationPopover];
+        [self.activitySheet.popoverPresentationController setSourceRect:rect];
+        [self.activitySheet.popoverPresentationController setSourceView:view];
+        [self.activitySheet.popoverPresentationController setPermittedArrowDirections:arrowDirections];
+
         self.presentingViewController = presentingViewController;
-        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:self.activitySheet];
-        self.popoverController.popoverContentSize = self.activitySheet.view.bounds.size;
-        [self.popoverController presentPopoverFromRect:rect inView:view permittedArrowDirections:arrowDirections animated:animated];
+        [self.presentingViewController presentViewController:self.activitySheet animated:animated completion:self.completionBlock];
     } else {
         [self presentModalActivitySheetFromViewController:presentingViewController completion:self.completionBlock];
     }
 }
 
-- (void)presentActivitySheetFromViewController:(UIViewController *)presentingViewController popoverFromBarButtonItem:(UIBarButtonItem *)item permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections animated:(BOOL)animated completion:(void (^)())completion {
+- (void)presentActivitySheetFromViewController:(UIViewController *)presentingViewController popoverFromBarButtonItem:(UIBarButtonItem *)item permittedArrowDirections:(UIPopoverArrowDirection)arrowDirections animated:(BOOL)animated completion:(void (^)(void))completion {
     if (!self.canPerformActivity) return;
 
     self.completionBlock = completion;
@@ -137,16 +139,19 @@
     if (self.activity) {
         [self.activity performActivityInViewController:presentingViewController];
     } else if (IntentKit.sharedInstance.isPad && self.activitySheet) {
+        [self.activitySheet.popoverPresentationController setPermittedArrowDirections:arrowDirections];
+        [self.activitySheet.popoverPresentationController setBarButtonItem:item];
+        [self.activitySheet setModalPresentationStyle:UIModalPresentationPopover];
+
         self.presentingViewController = presentingViewController;
-        self.popoverController = [[UIPopoverController alloc] initWithContentViewController:self.activitySheet];
-        [self.popoverController presentPopoverFromBarButtonItem:item  permittedArrowDirections:arrowDirections animated:animated];
+        [self.presentingViewController presentViewController:self.activitySheet animated:YES completion:completion];
     } else {
         [self presentModalActivitySheetFromViewController:presentingViewController completion:completion];
     }
 }
 
 - (void)dismissActivitySheetAnimated:(BOOL)animated {
-    void (^animatedActions)() = ^{
+    void (^animatedActions)(void) = ^{
         self.shadeView.alpha = 0;
         [self.activitySheet.view moveToPoint:CGPointMake(self.presentingViewController.view.left, self.presentingViewController.view.bottom)];
     };

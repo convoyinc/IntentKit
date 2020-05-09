@@ -8,7 +8,7 @@
 
 @interface INKWebViewController : UIViewController
 
-@property (nonatomic, copy) void (^closeBlock)();
+@property (nonatomic, copy) void (^closeBlock)(void);
 
 
 - (void)loadURL:(NSURL *)url;

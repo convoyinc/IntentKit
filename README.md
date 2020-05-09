@@ -147,8 +147,8 @@ If a user doesn't have any appropriate apps installed that can perform an action
 If you don't want this behavior, you can disable it by setting a handler's `useFallback` property to `NO` before invoking an action.
 
 
-### Safari and UIWebViews
-It's worth mentioning that IntentKit's default web browser is an in-app modal UIWebView. This is true both for actions triggered by an `INKBrowserHandler` and actions triggered by other handlers falling back to a web URL. If you don't want to do that, and would rather fall back on Safari for web actions, you can set your handler's `disableInAppOption` property to `NO`.
+### Safari and WKWebViews
+It's worth mentioning that IntentKit's default web browser is an in-app modal WKWebView. This is true both for actions triggered by an `INKBrowserHandler` and actions triggered by other handlers falling back to a web URL. If you don't want to do that, and would rather fall back on Safari for web actions, you can set your handler's `disableInAppOption` property to `NO`.
 
 
 Documentation
