@@ -1,23 +1,23 @@
 PODS:
   - Expecta (0.2.4)
-  - IntentKit (0.7.5):
-    - IntentKit/Core (= 0.7.5)
-    - IntentKit/Facebook (= 0.7.5)
-    - IntentKit/GPlus (= 0.7.5)
-    - IntentKit/Mail (= 0.7.5)
-    - IntentKit/Maps (= 0.7.5)
-    - IntentKit/Twitter (= 0.7.5)
-  - IntentKit/Core (0.7.5):
+  - IntentKit (0.7.5-convoy-1):
+    - IntentKit/Core (= 0.7.5-convoy-1)
+    - IntentKit/Facebook (= 0.7.5-convoy-1)
+    - IntentKit/GPlus (= 0.7.5-convoy-1)
+    - IntentKit/Mail (= 0.7.5-convoy-1)
+    - IntentKit/Maps (= 0.7.5-convoy-1)
+    - IntentKit/Twitter (= 0.7.5-convoy-1)
+  - IntentKit/Core (0.7.5-convoy-1):
     - MWLayoutHelpers
-  - IntentKit/Facebook (0.7.5):
+  - IntentKit/Facebook (0.7.5-convoy-1):
     - IntentKit/Core
-  - IntentKit/GPlus (0.7.5):
+  - IntentKit/GPlus (0.7.5-convoy-1):
     - IntentKit/Core
-  - IntentKit/Mail (0.7.5):
+  - IntentKit/Mail (0.7.5-convoy-1):
     - IntentKit/Core
-  - IntentKit/Maps (0.7.5):
+  - IntentKit/Maps (0.7.5-convoy-1):
     - IntentKit/Core
-  - IntentKit/Twitter (0.7.5):
+  - IntentKit/Twitter (0.7.5-convoy-1):
     - IntentKit/Core
   - MWLayoutHelpers (1.1.0)
   - OCHamcrest (5.3.0)
@@ -46,7 +46,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: cfaf1d3e2e194ca704a25e997093d30a1ce70b61
-  IntentKit: 5e205e75cf10421d5fda4e5df4336ac3c0249632
+  IntentKit: 18cdbfaa648a38dd5c466d8d08e51d5813e0ad79
   MWLayoutHelpers: 8af2eedae30fe06b75106b7be28b9fee1298512a
   OCHamcrest: 14696874144153e924a434742cbca38bdbbd4f25
   OCMockito: 9eee3c61e42f7cb8aa015d66f8cc16849701d973

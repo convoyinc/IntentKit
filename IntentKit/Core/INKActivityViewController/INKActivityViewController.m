@@ -124,6 +124,10 @@ static CGFloat const INKActivityViewControllerMinimumSpacing_Pad = 10.f;
 
     CGFloat viewHeight = self.cancelButton.height + self.defaultToggleView.height + self.collectionViewLayout.sectionInset.bottom + numberOfRows * INKActivityViewControllerRowHeight_Phone;
 
+    if (@available(iOS 11.0, *)) {
+        viewHeight += [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
+    }
+
     CGRect frame = CGRectMake(0,
                               self.view.bottom - viewHeight,
                               self.view.width,
@@ -137,7 +141,13 @@ static CGFloat const INKActivityViewControllerMinimumSpacing_Pad = 10.f;
     self.contentView.frame = frame;
     self.blurToolbar.frame = self.contentView.bounds;
 
-    [self.cancelButton moveToPoint:CGPointMake(0, self.contentView.height - self.cancelButton.height)];
+    CGFloat cancelButtonY = self.contentView.height - self.cancelButton.height;
+
+    if (@available(iOS 11.0, *)) {
+        cancelButtonY -= [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
+    }
+
+    [self.cancelButton moveToPoint:CGPointMake(0, cancelButtonY)];
 
 }
 - (void)setBounds {

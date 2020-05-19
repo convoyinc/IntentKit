@@ -369,6 +369,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IntentKitDemo/Pods-IntentKitDemo-resources.sh",
 				"${PODS_ROOT}/../../IntentKit/IntentKit-Localizations.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IntentKit/IntentKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IntentKit/IntentKit-Defaults.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IntentKit/IntentKit-INKBrowserHandler.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IntentKit/IntentKit-INKFacebookHandler.bundle",
@@ -380,6 +381,7 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IntentKit-Localizations.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IntentKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IntentKit-Defaults.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IntentKit-INKBrowserHandler.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IntentKit-INKFacebookHandler.bundle",

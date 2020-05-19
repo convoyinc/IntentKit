@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name      = 'IntentKit'
-  s.version   = '0.7.5-convoy-1'
+  s.version   = '0.7.5-convoy-2'
   s.license   = { :type => 'MIT', :file => "LICENSE" }
   s.summary   = "An easier way to handle third-party URL schemes in iOS apps."
   s.homepage  = 'https://github.com/intentkit/IntentKit'
@@ -13,8 +13,11 @@ Pod::Spec.new do |s|
     ss.source_files = 'IntentKit', 'IntentKit/Core/**/*.{h,m}', "IntentKit/Handlers/INKBrowserHandler.{h,m}", 'IntentKit/Apps/INKWebView/*.{h,m}'
     ss.dependency "MWLayoutHelpers"
     ss.resources = 'IntentKit/IntentKit-Localizations.bundle'
-    ss.resource_bundles = { 'IntentKit-Defaults' => "IntentKit/Apps/Defaults/*.{plist,png}",
-                            'IntentKit-INKBrowserHandler' => "IntentKit/Apps/{Chrome,Safari,1Password,INKWebView}/*.{plist,png}" }
+    ss.resource_bundles = {
+      'IntentKit': 'IntentKit/Images/*.png',
+      'IntentKit-Defaults' => "IntentKit/Apps/Defaults/*.{plist,png}",
+      'IntentKit-INKBrowserHandler' => "IntentKit/Apps/{Chrome,Safari,1Password,INKWebView}/*.{plist,png}"
+    }
     ss.requires_arc = true
   end
 
