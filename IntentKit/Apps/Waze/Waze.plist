@@ -9,7 +9,7 @@
 		<key>directionsFrom:to:mode:</key>
 		<string>https://waze.com/ul?q={{to}}&amp;navigate=yes</string>
 		<key>searchForLocation:</key>
-		<string>https://waze.com/ul?q={{to}}</string>
+		<string>https://waze.com/ul?q={{query}}</string>
 	</dict>
 </dict>
 </plist>
