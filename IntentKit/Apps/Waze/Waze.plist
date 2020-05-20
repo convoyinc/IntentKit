@@ -8,6 +8,8 @@
 	<dict>
 		<key>directionsFrom:to:mode:</key>
 		<string>https://waze.com/ul?q={{to}}&amp;navigate=yes</string>
+		<key>searchForLocation:</key>
+		<string>https://waze.com/ul?q={{to}}</string>
 	</dict>
 </dict>
 </plist>
