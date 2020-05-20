@@ -19,13 +19,15 @@
 		<string>&amp;z={{zoom}}</string>
 		<key>center</key>
 		<string>&amp;ll={{center}}</string>
+		<key>from</key>
+		<string>&amp;saddr={{from}}</string>
 	</dict>
 	<key>actions</key>
 	<dict>
 		<key>directionsFrom:to:mode:</key>
-		<string>http://maps.apple.com/?saddr={{from}}&amp;daddr={{to}}</string>
+		<string>https://maps.apple.com/?daddr={{to}}</string>
 		<key>searchForLocation:</key>
-		<string>http://maps.apple.com/?q={{query}}</string>
+		<string>https://maps.apple.com/?q={{query}}</string>
 	</dict>
 </dict>
 </plist>

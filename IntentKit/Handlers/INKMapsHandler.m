@@ -44,10 +44,13 @@
 - (INKActivityPresenter *)directionsFrom:(NSString *)from to:(NSString *)to mode:(INKMapsHandlerDirectionsMode)mode {
     NSString *command = NSStringFromSelector(_cmd);
     NSString *modeString = self.class.directionModes[@(mode)];
-    NSDictionary *args = [self argsDictionaryWithDictionary:
-                          @{@"from": from,
-                           @"to": to,
-                           @"mode": modeString}];
+    NSMutableDictionary *directionsArgs = [NSMutableDictionary dictionaryWithDictionary:@{@"to": to, @"mode": modeString}];
+
+    if (from != nil) {
+        directionsArgs[@"from"] = from;
+    }
+
+    NSDictionary *args = [self argsDictionaryWithDictionary:directionsArgs];
 
     return [self performCommand:command withArguments:args];
 }

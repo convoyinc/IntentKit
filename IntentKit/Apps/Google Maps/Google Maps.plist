@@ -10,11 +10,13 @@
 		<string>&amp;zoom={{zoom}}</string>
 		<key>center</key>
 		<string>&amp;center={{center}}</string>
+		<key>from</key>
+		<string>&amp;origin={{from}}</string>
 	</dict>
 	<key>actions</key>
 	<dict>
 		<key>directionsFrom:to:mode:</key>
-		<string>https://www.google.com/maps/dir/?api=1&amp;origin={{from}}&amp;destination={{to}}&amp;dir_action=navigate</string>
+		<string>https://www.google.com/maps/dir/?api=1&amp;dir_action=navigate&amp;destination={{to}}</string>
 		<key>searchForLocation:</key>
 		<string>https://www.google.com/maps/search/?api=1&amp;query={{query}}</string>
 	</dict>
