@@ -14,9 +14,9 @@
 	<key>actions</key>
 	<dict>
 		<key>directionsFrom:to:mode:</key>
-		<string>comgooglemaps://?saddr={{from}}&amp;daddr={{to}}&amp;directionsmode={{mode}}</string>
+		<string>https://www.google.com/maps/dir/?api=1&amp;origin={{from}}&amp;destination={{to}}&amp;dir_action=navigate</string>
 		<key>searchForLocation:</key>
-		<string>comgooglemaps://?q={{query}}</string>
+		<string>https://www.google.com/maps/search/?api=1&amp;query={{query}}</string>
 	</dict>
 </dict>
 </plist>
